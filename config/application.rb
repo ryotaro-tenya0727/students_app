@@ -23,7 +23,14 @@ module TrimApp
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
-
+    config.generators do |g|
+      g.assets  false
+      g.test_framework    false
+      g.skip_routes   true # config/routes.rb を変更しない
+      g.helper false
+    end
+    config.active_record.default_timezone = :local
+    config.time_zone = 'Tokyo'
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
