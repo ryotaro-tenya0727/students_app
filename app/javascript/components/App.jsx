@@ -1,7 +1,12 @@
-const App = (props) => <div>Hello {props.name}!</div>;
+import React from 'react';
+
+const App = (props) => {
+  console.log('App');
+  return <div>Hello {props.name}!</div>;
+};
 
 App.defaultProps = {
-  name: 'ほに',
+  name: 'ほにたん好きや',
 };
 
 export default App;
