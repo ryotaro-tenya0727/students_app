@@ -97,3 +97,5 @@ Style/BlockDelimiters:
 
 Style/StringConcatenation:
   Enabled: false
+Style/SafeNavigation:
+  Enabled: false
