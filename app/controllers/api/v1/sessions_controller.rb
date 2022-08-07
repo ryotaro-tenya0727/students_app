@@ -23,6 +23,10 @@ class Api::V1::SessionsController < ApplicationController
     end
   end
 
+  def index
+    render json: { status: 200, logged_out: true }
+  end
+
   private
 
   def session_params
