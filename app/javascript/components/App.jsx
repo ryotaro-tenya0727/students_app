@@ -1,12 +1,8 @@
 import React from 'react';
+import { Home } from './../components/pages/Pages';
 
-const App = (props) => {
-  console.log('App');
-  return <div>Hello {props.name}!</div>;
-};
-
-App.defaultProps = {
-  name: 'ほにたん好きや',
+const App = () => {
+  return <Home name='みこたん' />;
 };
 
 export default App;
