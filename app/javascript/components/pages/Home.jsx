@@ -1,7 +1,7 @@
 import React from 'react';
 
-const Home = ({ name }) => {
-  return <div>{name}</div>;
+const Home = () => {
+  return <div>ホーム画面だああああああ</div>;
 };
 
 export default Home;

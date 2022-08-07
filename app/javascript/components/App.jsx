@@ -1,8 +1,9 @@
 import React from 'react';
-import { Home } from './../components/pages/Pages';
+
+import { Routers } from './route/Routers';
 
 const App = () => {
-  return <Home name='みこたん' />;
+  return <Routers />;
 };
 
 export default App;
