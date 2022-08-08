@@ -15,7 +15,7 @@ const Home = ({ loggedInStatus, handleLogin }) => {
       <Registration
         handleSuccessfulAuthentication={handleSuccessfulAuthentication}
       />
-      <Login />
+      <Login handleSuccessfulAuthentication={handleSuccessfulAuthentication} />
     </div>
   );
 };

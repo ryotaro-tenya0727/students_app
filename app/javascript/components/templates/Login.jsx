@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const Login = () => {
+const Login = ({ handleSuccessfulAuthentication }) => {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
@@ -17,7 +17,7 @@ const Login = () => {
       .then((response) => {
         // 変更
         if (response.data.logged_in) {
-          props.handleSuccessfulAuthentication(response.data);
+          handleSuccessfulAuthentication(response.data);
         }
       })
       .catch((error) => {
