@@ -14,7 +14,8 @@ const Home = ({ loggedInStatus, handleLogin, handleLogout }) => {
   const handleLogoutClick = () => {
     axios
       .delete('http://localhost:3000/api/v1/logout', { withCredentials: true })
-      .then(() => {
+      .then((response) => {
+        // console.log(response);
         handleLogout();
       })
       .catch((error) => console.log('ログアウトエラー', error));

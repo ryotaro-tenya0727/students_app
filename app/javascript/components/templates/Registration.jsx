@@ -18,8 +18,8 @@ const Registration = ({ handleSuccessfulAuthentication }) => {
             password: password,
             password_confirmation: passwordConfirmation,
           },
-        },
-        { withCredentials: true }
+        }
+        // { withCredentials: true }
       )
       .then((response) => {
         if (response.data.status === 'created') {

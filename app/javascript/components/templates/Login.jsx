@@ -14,8 +14,8 @@ const Login = ({ handleSuccessfulAuthentication }) => {
             email: email,
             password: password,
           },
-        },
-        { withCredentials: true }
+        }
+        // { withCredentials: true }
       )
       .then((response) => {
         if (response.data.logged_in) {
