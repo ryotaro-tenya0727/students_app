@@ -22,7 +22,16 @@ export const Routers = () => {
     axios
       .get('http://localhost:3000/api/v1/logged_in', { withCredentials: true })
       .then((response) => {
-        console.log('ログイン状況', response);
+        if (response.data.logged_in && loggedInStatus === '未ログイン') {
+          setLoggedInStatus('ログインなう');
+          setUser(response.data.user);
+        } else if (
+          !response.data.logged_in &&
+          loggedInStatus === 'ログインなう'
+        ) {
+          setLoggedInStatus('未ログイン');
+          setUser({});
+        }
       })
       .catch((error) => {
         console.log('ログインエラー', error);
