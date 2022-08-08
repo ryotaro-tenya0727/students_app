@@ -1,6 +1,7 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import axios from 'axios';
 
 import { Home, Dashboard } from './../pages/Pages';
 
@@ -19,7 +20,7 @@ export const Routers = () => {
   // 追加
   const checkLoginStatus = () => {
     axios
-      .get('http://localhost:3001/logged_in', { withCredentials: true })
+      .get('http://localhost:3000/logged_in', { withCredentials: true })
       .then((response) => {
         console.log('ログイン状況', response);
       })
