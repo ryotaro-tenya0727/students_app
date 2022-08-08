@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root to: 'home#index'
-  get '*path', to: 'home#index'
-  namespace :api do
+  namespace :api, format: 'json'  do
     namespace :v1 do
       post '/signup', to: 'registrations#signup'
       post '/login', to: 'sessions#login'
@@ -11,4 +10,6 @@ Rails.application.routes.draw do
       post '/index', to: 'sessions#index'
     end
   end
+
+  get '*path', to: 'home#index'
 end

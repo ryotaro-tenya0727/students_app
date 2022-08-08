@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const Registration = () => {
+const Registration = ({ handleSuccessfulAuthentication }) => {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
-  const handleSubmit = (event) => {
-    //追加
-    axios
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    await axios
       .post(
         'http://localhost:3000/api/v1/signup',
         {
@@ -22,12 +22,13 @@ const Registration = () => {
         { withCredentials: true }
       )
       .then((response) => {
-        console.log('registration res', response);
+        if (response.data.status === 'created') {
+          handleSuccessfulAuthentication(response.data);
+        }
       })
       .catch((error) => {
         console.log('registration error', error);
       });
-    event.preventDefault();
   };
   return (
     <div>
