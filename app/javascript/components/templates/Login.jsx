@@ -7,16 +7,12 @@ const Login = ({ handleSuccessfulAuthentication }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     await axios
-      .post(
-        'http://localhost:3000/api/v1/login',
-        {
-          user: {
-            email: email,
-            password: password,
-          },
-        }
-        // { withCredentials: true }
-      )
+      .post('http://localhost:3000/api/v1/login', {
+        user: {
+          email: email,
+          password: password,
+        },
+      })
       .then((response) => {
         if (response.data.logged_in) {
           handleSuccessfulAuthentication(response.data);
