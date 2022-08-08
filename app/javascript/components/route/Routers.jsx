@@ -20,7 +20,7 @@ export const Routers = () => {
   // 追加
   const checkLoginStatus = () => {
     axios
-      .get('http://localhost:3000/logged_in', { withCredentials: true })
+      .get('http://localhost:3000/api/v1/logged_in', { withCredentials: true })
       .then((response) => {
         console.log('ログイン状況', response);
       })
