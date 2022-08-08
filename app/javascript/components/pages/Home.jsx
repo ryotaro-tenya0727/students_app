@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { Registration } from './../templates/Templates';
+import { Registration, Login } from './../templates/Templates';
 
 const Home = ({ loggedInStatus, handleLogin }) => {
   const navigate = useNavigate();
@@ -15,6 +15,7 @@ const Home = ({ loggedInStatus, handleLogin }) => {
       <Registration
         handleSuccessfulAuthentication={handleSuccessfulAuthentication}
       />
+      <Login />
     </div>
   );
 };
