@@ -9,14 +9,18 @@ const Registration = ({ handleSuccessfulAuthentication }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     await axios
-      .post('http://localhost:3000/api/v1/signup', {
-        user: {
-          email: email,
-          name: name,
-          password: password,
-          password_confirmation: passwordConfirmation,
+      .post(
+        'http://localhost:3000/api/v1/signup',
+        {
+          user: {
+            email: email,
+            name: name,
+            password: password,
+            password_confirmation: passwordConfirmation,
+          },
         },
-      })
+        { withCredentials: true }
+      )
       .then((response) => {
         if (response.data.status === 'created') {
           handleSuccessfulAuthentication(response.data);

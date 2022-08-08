@@ -3,19 +3,21 @@ import axios from 'axios';
 
 const Login = ({ handleSuccessfulAuthentication }) => {
   const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const handleSubmit = async (event) => {
     event.preventDefault();
     await axios
-      .post('http://localhost:3000/api/v1/login', {
-        user: {
-          email: email,
-          password: password,
+      .post(
+        'http://localhost:3000/api/v1/login',
+        {
+          user: {
+            email: email,
+            password: password,
+          },
         },
-      })
+        { withCredentials: true }
+      )
       .then((response) => {
-        // 変更
         if (response.data.logged_in) {
           handleSuccessfulAuthentication(response.data);
         }
