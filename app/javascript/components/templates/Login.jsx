@@ -44,7 +44,7 @@ const Login = ({ handleSuccessfulAuthentication }) => {
           value={password}
           onChange={(event) => setPassword(event.target.value)}
         />
-        <button type='submit'>登録</button>
+        <button type='submit'>ログインする</button>
       </form>
     </div>
   );

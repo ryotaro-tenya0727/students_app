@@ -17,6 +17,11 @@ export const Routers = () => {
     checkLoginStatus();
   });
 
+  const handleLogout = () => {
+    setLoggedInStatus('未ログイン');
+    setUser({});
+  };
+
   // 追加
   const checkLoginStatus = () => {
     axios
@@ -43,7 +48,11 @@ export const Routers = () => {
         <Route
           path='/'
           element={
-            <Home loggedInStatus={loggedInStatus} handleLogin={handleLogin} />
+            <Home
+              loggedInStatus={loggedInStatus}
+              handleLogin={handleLogin}
+              handleLogout={handleLogout}
+            />
           }
         />
         <Route

@@ -1,13 +1,23 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 import { Registration, Login } from './../templates/Templates';
 
-const Home = ({ loggedInStatus, handleLogin }) => {
+const Home = ({ loggedInStatus, handleLogin, handleLogout }) => {
   const navigate = useNavigate();
   const handleSuccessfulAuthentication = (data) => {
     handleLogin(data);
     navigate('/dashboard');
+  };
+
+  const handleLogoutClick = () => {
+    axios
+      .delete('http://localhost:3000/api/v1/logout', { withCredentials: true })
+      .then(() => {
+        handleLogout();
+      })
+      .catch((error) => console.log('ログアウトエラー', error));
   };
   return (
     <div>
@@ -16,6 +26,7 @@ const Home = ({ loggedInStatus, handleLogin }) => {
         handleSuccessfulAuthentication={handleSuccessfulAuthentication}
       />
       <Login handleSuccessfulAuthentication={handleSuccessfulAuthentication} />
+      <button onClick={handleLogoutClick}>ログアウト</button>
     </div>
   );
 };
