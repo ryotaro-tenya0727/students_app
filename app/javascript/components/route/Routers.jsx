@@ -15,7 +15,7 @@ export const Routers = () => {
 
   useEffect(() => {
     checkLoginStatus();
-  });
+  }, []);
 
   const handleLogout = () => {
     setLoggedInStatus('未ログイン');
