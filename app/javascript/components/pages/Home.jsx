@@ -4,6 +4,8 @@ import axios from 'axios';
 
 import { Registration, Login } from './../templates/Templates';
 
+import home from './../../css/pages/home.module.css';
+
 const Home = ({ loggedInStatus, handleLogin, handleLogout }) => {
   const navigate = useNavigate();
   const handleSuccessfulAuthentication = (data) => {
@@ -21,14 +23,20 @@ const Home = ({ loggedInStatus, handleLogin, handleLogout }) => {
       .catch((error) => console.log('ログアウトエラー', error));
   };
   return (
-    <div>
-      <h2>ログイン状態: {loggedInStatus}</h2>
-      <Registration
-        handleSuccessfulAuthentication={handleSuccessfulAuthentication}
-      />
-      <Login handleSuccessfulAuthentication={handleSuccessfulAuthentication} />
-      <button onClick={handleLogoutClick}>ログアウト</button>
-    </div>
+    <>
+      <h2>
+        ログイン状態: {loggedInStatus}
+        <button onClick={handleLogoutClick}>ログアウト</button>
+      </h2>
+      <div className={home.register_login_wrapper}>
+        <Registration
+          handleSuccessfulAuthentication={handleSuccessfulAuthentication}
+        />
+        <Login
+          handleSuccessfulAuthentication={handleSuccessfulAuthentication}
+        />
+      </div>
+    </>
   );
 };
 
