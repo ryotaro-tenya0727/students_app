@@ -3,22 +3,24 @@ import axios from 'axios';
 import { useSetRecoilState, useRecoilState } from 'recoil';
 
 import { Registration, Login } from './../templates/Templates';
-import { LoginStatus, UserStatus } from './../store/LoginState';
+import { LoadingStatus, LoginStatus, UserStatus } from './../store/LoginState';
 
 import home from './../../css/pages/home.module.css';
 
 const Home = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useRecoilState(LoadingStatus);
   const [isLogin, setIsLogin] = useRecoilState(LoginStatus);
   const setUserInfo = useSetRecoilState(UserStatus);
-
+  // const sleep = (waitTime) =>
+  //   new Promise((resolve) => setTimeout(resolve, waitTime));
   const handleLogout = () => {
     setIsLogin(false);
     setUserInfo({});
   };
 
-  const handleLogoutClick = () => {
+  const handleLogoutClick = async () => {
     setIsLoading(true);
+    // await sleep(500);
     axios
       .delete('http://localhost:3000/api/v1/logout', { withCredentials: true })
       .then((response) => {

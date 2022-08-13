@@ -9,3 +9,8 @@ export const UserStatus = atom({
   key: 'userState',
   default: {},
 });
+
+export const LoadingStatus = atom({
+  key: 'loadingState',
+  default: true,
+});
