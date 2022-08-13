@@ -1,13 +1,27 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { LoginStatus, UserStatus } from './../store/LoginState';
 
-const Registration = ({ handleSuccessfulAuthentication }) => {
+const Registration = () => {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
+
+  const setIsLogin = useSetRecoilState(LoginStatus);
+  const setUserInfo = useSetRecoilState(UserStatus);
+
+  const handleLogin = (data) => {
+    setIsLogin(true);
+    setUserInfo(data.user);
+  };
+
+  const handleSuccessfulAuthentication = (data) => {
+    handleLogin(data);
+    navigate('/dashboard');
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     await axios
@@ -28,6 +42,7 @@ const Registration = ({ handleSuccessfulAuthentication }) => {
         console.log('registration error', error);
       });
   };
+
   return (
     <div>
       <p>新規登録</p>

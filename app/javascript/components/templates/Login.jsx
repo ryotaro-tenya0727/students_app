@@ -1,9 +1,26 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const Login = ({ handleSuccessfulAuthentication }) => {
+import { useSetRecoilState } from 'recoil';
+import { LoginStatus, UserStatus } from './../store/LoginState';
+
+const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const setIsLogin = useSetRecoilState(LoginStatus);
+  const setUserInfo = useSetRecoilState(UserStatus);
+
+  const handleLogin = (data) => {
+    setIsLogin(true);
+    setUserInfo(data.user);
+  };
+
+  const handleSuccessfulAuthentication = (data) => {
+    handleLogin(data);
+    navigate('/dashboard');
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     await axios

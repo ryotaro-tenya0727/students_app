@@ -10,21 +10,6 @@ import { Home, Dashboard } from './../pages/Pages';
 export const Routers = () => {
   const setIsLogin = useSetRecoilState(LoginStatus);
   const setUserInfo = useSetRecoilState(UserStatus);
-  const handleLogin = (data) => {
-    setIsLogin(true);
-    setUserInfo(data.user);
-  };
-
-  useEffect(() => {
-    checkLoginStatus();
-  }, []);
-
-  const handleLogout = () => {
-    setIsLogin(false);
-    setUserInfo({});
-  };
-
-  // 追加
   const checkLoginStatus = () => {
     axios
       .get('http://localhost:3000/api/v1/logged_in', { withCredentials: true })
@@ -41,15 +26,15 @@ export const Routers = () => {
         console.log('ログインエラー', error);
       });
   };
+
+  useEffect(() => {
+    checkLoginStatus();
+  }, []);
+
   return (
     <BrowserRouter>
       <Routes>
-        <Route
-          path='/'
-          element={
-            <Home handleLogin={handleLogin} handleLogout={handleLogout} />
-          }
-        />
+        <Route path='/' element={<Home />} />
         <Route path='/dashboard' element={<Dashboard />} />
       </Routes>
     </BrowserRouter>

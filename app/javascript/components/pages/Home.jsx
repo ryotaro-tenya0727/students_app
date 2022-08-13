@@ -1,16 +1,18 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import { Registration, Login } from './../templates/Templates';
+import { LoginStatus, UserStatus } from './../store/LoginState';
 
 import home from './../../css/pages/home.module.css';
 
-const Home = ({ loggedInStatus, handleLogin, handleLogout }) => {
-  const navigate = useNavigate();
-  const handleSuccessfulAuthentication = (data) => {
-    handleLogin(data);
-    navigate('/dashboard');
+const Home = () => {
+  const [isLogin, setIsLogin] = useSetRecoilState(LoginStatus);
+  const setUserInfo = useSetRecoilState(UserStatus);
+
+  const handleLogout = () => {
+    setIsLogin(false);
+    setUserInfo({});
   };
 
   const handleLogoutClick = () => {
@@ -25,16 +27,12 @@ const Home = ({ loggedInStatus, handleLogin, handleLogout }) => {
   return (
     <>
       <h2>
-        ログイン状態: {loggedInStatus}
+        ログイン状態: {isLogin}
         <button onClick={handleLogoutClick}>ログアウト</button>
       </h2>
       <div className={home.register_login_wrapper}>
-        <Registration
-          handleSuccessfulAuthentication={handleSuccessfulAuthentication}
-        />
-        <Login
-          handleSuccessfulAuthentication={handleSuccessfulAuthentication}
-        />
+        <Registration />
+        <Login />
       </div>
     </>
   );
