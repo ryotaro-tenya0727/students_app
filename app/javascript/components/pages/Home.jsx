@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useSetRecoilState, useRecoilState } from 'recoil';
 
-import { Registration, Login } from './../templates/Templates';
+import { RegistrationForm, LoginForm } from './../templates/Templates';
 import { LoadingStatus, LoginStatus, UserStatus } from './../store/LoginState';
 
 import home from './../../css/pages/home.module.css';
