@@ -11,8 +11,8 @@ const Home = () => {
   const [isLoading, setIsLoading] = useRecoilState(LoadingStatus);
   const [isLogin, setIsLogin] = useRecoilState(LoginStatus);
   const setUserInfo = useSetRecoilState(UserStatus);
-  // const sleep = (waitTime) =>
-  //   new Promise((resolve) => setTimeout(resolve, waitTime));
+  const sleep = (waitTime) =>
+    new Promise((resolve) => setTimeout(resolve, waitTime));
   const handleLogout = () => {
     setIsLogin(false);
     setUserInfo({});
@@ -20,8 +20,7 @@ const Home = () => {
 
   const handleLogoutClick = async () => {
     setIsLoading(true);
-    // await sleep(500);
-    axios
+    await axios
       .delete('http://localhost:3000/api/v1/logout', { withCredentials: true })
       .then((response) => {
         // console.log(response);
