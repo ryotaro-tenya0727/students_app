@@ -4,9 +4,12 @@ import axios from 'axios';
 import { useSetRecoilState } from 'recoil';
 import { LoginStatus, UserStatus } from './../store/LoginState';
 
+import { useNavigate } from 'react-router-dom';
+
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  let navigate = useNavigate();
 
   const setIsLogin = useSetRecoilState(LoginStatus);
   const setUserInfo = useSetRecoilState(UserStatus);
