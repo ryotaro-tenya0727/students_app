@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useRecoilState } from 'recoil';
+import { LoginStatus, UserStatus } from './../store/LoginState';
 
 const Registration = ({ handleSuccessfulAuthentication }) => {
   const [email, setEmail] = useState('');

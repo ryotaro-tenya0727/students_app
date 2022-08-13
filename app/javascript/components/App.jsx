@@ -1,16 +1,14 @@
 import React from 'react';
 
 import { Routers } from './route/Routers';
-import {
-  RecoilRoot,
-  atom,
-  selector,
-  useRecoilState,
-  useRecoilValue,
-} from 'recoil';
+import { RecoilRoot } from 'recoil';
 
 const App = () => {
-  return <Routers />;
+  return (
+    <RecoilRoot>
+      <Routers />
+    </RecoilRoot>
+  );
 };
 
 export default App;
