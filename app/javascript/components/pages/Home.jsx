@@ -1,18 +1,14 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useSetRecoilState, useRecoilState } from 'recoil';
 
-import { RegistrationForm, LoginForm } from './../templates/Templates';
 import { LoadingStatus, LoginStatus, UserStatus } from './../store/LoginState';
-
-import home from './../../css/pages/home.module.css';
 
 const Home = () => {
   const [isLoading, setIsLoading] = useRecoilState(LoadingStatus);
   const [isLogin, setIsLogin] = useRecoilState(LoginStatus);
   const setUserInfo = useSetRecoilState(UserStatus);
-  const sleep = (waitTime) =>
-    new Promise((resolve) => setTimeout(resolve, waitTime));
   const handleLogout = () => {
     setIsLogin(false);
     setUserInfo({});
@@ -36,10 +32,7 @@ const Home = () => {
         {isLoading ? <>ローディング</> : isLogin ? 'ログイン中' : '未ログイン'}
         <button onClick={handleLogoutClick}>ログアウト</button>
       </h2>
-      <div className={home.register_login_wrapper}>
-        <Registration />
-        <Login />
-      </div>
+      <Link to='/login'>ログイン画面へ</Link>
     </>
   );
 };

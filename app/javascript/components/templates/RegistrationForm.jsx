@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useLogin } from './../hooks/useLogin';
+import { useLogin } from '../hooks/useLogin';
 
 const RegistrationForm = () => {
   const [email, setEmail] = useState('');
