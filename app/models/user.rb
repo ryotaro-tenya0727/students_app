@@ -18,6 +18,7 @@ class User < ApplicationRecord
 
   has_many :interesting_technologies, dependent: :destroy
   has_many :register_technologies, through: :interesting_technologies, source: :technology
+  has_many :links
 
   validates :email, presence: true
   validates :email, uniqueness: true

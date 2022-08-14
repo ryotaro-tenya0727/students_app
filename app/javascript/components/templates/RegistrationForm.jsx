@@ -11,7 +11,7 @@ const RegistrationForm = () => {
     defaultValues: {
       user: {},
       technologies: [],
-      links: [{ name: '' }, { name: 'aaa' }],
+      links: [{ name: '' }],
     },
   });
   const { fields, append, prepend, remove, swap, move, insert } = useFieldArray(
