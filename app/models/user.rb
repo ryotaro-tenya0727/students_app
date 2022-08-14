@@ -16,7 +16,7 @@
 class User < ApplicationRecord
   has_secure_password
 
-  has_many :interesting_technologies
+  has_many :interesting_technologies, dependent: :destroy
   has_many :register_technologies, through: :interesting_technologies, source: :technology
 
   validates :email, presence: true
