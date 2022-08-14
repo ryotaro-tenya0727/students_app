@@ -10,11 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_14_062709) do
+ActiveRecord::Schema.define(version: 2022_08_14_073841) do
 
   create_table "technologies", force: :cascade do |t|
     t.string "name", null: false
     t.string "genre", null: false
+    t.index ["name"], name: "index_technologies_on_name", unique: true
   end
 
   create_table "users", force: :cascade do |t|
