@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useForm, useFieldArray } from 'react-hook-form';
+import { useSetRecoilState } from 'recoil';
+
+import { LoadingStatus } from './../store/LoginState';
 
 import { useLogin } from '../hooks/useLogin';
 
 const RegistrationForm = () => {
   const { handleSuccessfulAuthentication } = useLogin();
-
+  const setIsLoading = useSetRecoilState(LoadingStatus);
   const { control, register, handleSubmit } = useForm({
     defaultValues: {
       user: { technology_ids: [], links: [{ url: '' }] },
@@ -28,7 +31,7 @@ const RegistrationForm = () => {
   };
 
   const onSubmit = async (data) => {
-    console.log(data);
+    setIsLoading(true);
     await axios
       .post('http://localhost:3000/api/v1/signup', data)
       .then((response) => {
@@ -42,7 +45,7 @@ const RegistrationForm = () => {
       .catch((error) => {
         console.log('registration error');
       });
-    // console.log(data);
+    setIsLoading(false);
   };
 
   return (

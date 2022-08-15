@@ -20,7 +20,6 @@ export const DefaultLayout = ({ children }) => {
         withCredentials: true,
       })
       .then((response) => {
-        // console.log(response);
         handleLogout();
       })
       .catch((error) => console.log('ログアウトエラー', error));
@@ -30,7 +29,13 @@ export const DefaultLayout = ({ children }) => {
     <>
       <h2>
         ログイン状態:
-        {isLoading ? <>ローディング</> : isLogin ? 'ログイン中' : '未ログイン'}
+        {isLoading ? (
+          <>ローディングぐぐぐぐぐぐぐぐぐぐぐぐぐぐぐぐぐぐぐぐぐ</>
+        ) : isLogin ? (
+          'ログイン中'
+        ) : (
+          '未ログイン'
+        )}
         <button onClick={handleLogoutClick}>ログアウト</button>
       </h2>
       {children}

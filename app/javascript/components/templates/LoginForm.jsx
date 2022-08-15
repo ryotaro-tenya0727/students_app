@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useSetRecoilState } from 'recoil';
+
+import { LoadingStatus } from './../store/LoginState';
 
 import { useLogin } from '../hooks/useLogin';
 
@@ -7,8 +10,10 @@ const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { handleSuccessfulAuthentication } = useLogin();
+  const setIsLoading = useSetRecoilState(LoadingStatus);
 
   const handleSubmit = async (event) => {
+    setIsLoading(true);
     event.preventDefault();
     await axios
       .post('http://localhost:3000/api/v1/login', {
@@ -25,6 +30,7 @@ const LoginForm = () => {
       .catch((error) => {
         console.log('registration error', error);
       });
+    setIsLoading(false);
   };
   return (
     <div>
