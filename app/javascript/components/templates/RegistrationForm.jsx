@@ -9,7 +9,7 @@ const RegistrationForm = () => {
 
   const { control, register, handleSubmit } = useForm({
     defaultValues: {
-      user: { userinfo: {}, technology_ids: [], links: [{ url: '' }] },
+      user: { technology_ids: [], links: [{ url: '' }] },
     },
   });
   const { fields, append, prepend, remove, swap, move, insert } = useFieldArray(
@@ -50,16 +50,13 @@ const RegistrationForm = () => {
       <p>新規登録</p>
       <form onSubmit={handleSubmit(onSubmit)}>
         <label>メール</label>
-        <input {...register('user.userinfo.email')} />
+        <input {...register('user.email')} />
         <br />
         <label>名前</label>
-        <input {...register('user.userinfo.name')} />
+        <input {...register('user.name')} />
         <br />
         <label>パスワード</label>
-        <input {...register('user.userinfo.password')} />
-        <br />
-        <label>確認パスワード</label>
-        <input {...register('user.userinfo.password_confirmation')} />
+        <input {...register('user.password')} />
         <br />
         <p></p>
         Ruby
