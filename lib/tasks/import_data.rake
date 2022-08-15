@@ -2,10 +2,12 @@ require 'csv'
 
 namespace :import_data do
   task technologies: :environment do
-    columns = [:name, :genre]
-    CSV.foreach('tmp/csv/technologies_data.csv').each_slice(1000) do |row|
-      technologies = row
-      Technology.import columns, technologies, on_duplicate_key_update: {conflict_target: [:id], columns: [:name]}
+    technologies = []
+    CSV.foreach('tmp/csv/technologies_data.csv').each_slice(1000) do |rows|
+      rows.each{|row|
+        technologies << {name: row[0], genre:row[1]}
+      }
     end
+    Technology.upsert_all(technologies, unique_by: :name)
   end
 end

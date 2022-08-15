@@ -1,7 +1,7 @@
 class Api::V1::RegistrationsController < ApplicationController
   def signup
-    @user = User.new(registrations_params)
-    if @user.save
+    @user = RegistrationForm.new(registrations_params).save_user!
+    if @user
       login!
       render json: { status: :created, user: @user }
     else
@@ -12,6 +12,6 @@ class Api::V1::RegistrationsController < ApplicationController
   private
 
   def registrations_params
-    params.require(:user).permit(:email, :name, :password, :password_confirmation)
+    params.require(:user).permit(:email, :name,  :password, links: [:url], technology_ids: [])
   end
 end

@@ -1,70 +1,96 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useForm, useFieldArray } from 'react-hook-form';
+
 import { useLogin } from '../hooks/useLogin';
 
 const RegistrationForm = () => {
-  const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordConfirmation, setPasswordConfirmation] = useState('');
   const { handleSuccessfulAuthentication } = useLogin();
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const { control, register, handleSubmit } = useForm({
+    defaultValues: {
+      user: { technology_ids: [], links: [{ url: '' }] },
+    },
+  });
+  const { fields, append, prepend, remove, swap, move, insert } = useFieldArray(
+    {
+      control, //
+      name: 'user.links',
+    }
+  );
+
+  const handleAppend = (value) => {
+    append(value);
+  };
+
+  const handleRemove = (index) => {
+    remove(index);
+  };
+
+  const onSubmit = async (data) => {
+    console.log(data);
     await axios
-      .post('http://localhost:3000/api/v1/signup', {
-        user: {
-          email: email,
-          name: name,
-          password: password,
-          password_confirmation: passwordConfirmation,
-        },
-      })
+      .post('http://localhost:3000/api/v1/signup', data)
       .then((response) => {
         if (response.data.status === 'created') {
           handleSuccessfulAuthentication(response.data);
         }
+        if (response.data.status === 500) {
+          console.log('missing');
+        }
       })
       .catch((error) => {
-        console.log('registration error', error);
+        console.log('registration error');
       });
+    // console.log(data);
   };
 
   return (
     <div>
       <p>新規登録</p>
-      <form onSubmit={handleSubmit}>
-        <input
-          type='email'
-          name='email'
-          placeholder='メールアドレス'
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
-        />
-        <input
-          name='name'
-          placeholder='名前'
-          value={name}
-          onChange={(event) => setName(event.target.value)}
-        />
-        <input
-          type='password'
-          name='password'
-          placeholder='パスワード'
-          value={password}
-          onChange={(event) => setPassword(event.target.value)}
-        />
-        <input
-          type='password'
-          name='password_confirmation'
-          placeholder='確認用パスワード'
-          value={passwordConfirmation}
-          onChange={(event) => setPasswordConfirmation(event.target.value)}
-        />
-        <button type='submit'>登録</button>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <label>メール</label>
+        <input {...register('user.email')} />
+        <br />
+        <label>名前</label>
+        <input {...register('user.name')} />
+        <br />
+        <label>パスワード</label>
+        <input {...register('user.password')} />
+        <br />
+        <p></p>
+        Ruby
+        <input {...register('user.technology_ids')} type='checkbox' value='1' />
+        javascript
+        <input {...register('user.technology_ids')} type='checkbox' value='2' />
+        Ruby on Rails
+        <input {...register('user.technology_ids')} type='checkbox' value='3' />
+        React
+        <input {...register('user.technology_ids')} type='checkbox' value='4' />
+        AWS
+        <input {...register('user.technology_ids')} type='checkbox' value='5' />
+        GCP
+        <input {...register('user.technology_ids')} type='checkbox' value='6' />
+        <p>ブログ・SNS・ポートフォリオのリンク</p>
+        {fields.map((field, index) => (
+          <div key={index}>
+            <input
+              type='url'
+              key={field.id}
+              {...register(`user.links[${index}].url`)}
+            />
+            <button type='button' onClick={() => handleRemove(index)}>
+              削除
+            </button>
+          </div>
+        ))}
+        <button type='button' onClick={() => handleAppend({ url: '' })}>
+          リンクを追加
+        </button>
+        <p></p>
+        <input type='submit' value='この内容で登録' />
       </form>
     </div>
   );
 };
-
 export default RegistrationForm;
