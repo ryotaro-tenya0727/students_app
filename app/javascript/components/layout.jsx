@@ -29,13 +29,7 @@ export const DefaultLayout = ({ children }) => {
     <>
       <h2>
         ログイン状態:
-        {isLoading ? (
-          <>ローディングぐぐぐぐぐぐぐぐぐぐぐぐぐぐぐぐぐぐぐぐぐ</>
-        ) : isLogin ? (
-          'ログイン中'
-        ) : (
-          '未ログイン'
-        )}
+        {isLoading ? <>ローディング</> : isLogin ? 'ログイン中' : '未ログイン'}
         <button onClick={handleLogoutClick}>ログアウト</button>
       </h2>
       {children}

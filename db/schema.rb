@@ -10,7 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_14_225912) do
+ActiveRecord::Schema.define(version: 2022_08_16_050151) do
+
+  create_table "genres", force: :cascade do |t|
+    t.string "name", null: false
+    t.index ["name"], name: "index_genres_on_name", unique: true
+  end
 
   create_table "interesting_technologies", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -36,6 +41,13 @@ ActiveRecord::Schema.define(version: 2022_08_14_225912) do
     t.index ["name"], name: "index_technologies_on_name", unique: true
   end
 
+  create_table "technology_genres", force: :cascade do |t|
+    t.integer "technology_id", null: false
+    t.integer "genre_id", null: false
+    t.index ["genre_id"], name: "index_technology_genres_on_genre_id"
+    t.index ["technology_id"], name: "index_technology_genres_on_technology_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", null: false
     t.string "name", null: false
@@ -48,4 +60,6 @@ ActiveRecord::Schema.define(version: 2022_08_14_225912) do
   add_foreign_key "interesting_technologies", "technologies"
   add_foreign_key "interesting_technologies", "users"
   add_foreign_key "links", "users"
+  add_foreign_key "technology_genres", "genres"
+  add_foreign_key "technology_genres", "technologies"
 end
