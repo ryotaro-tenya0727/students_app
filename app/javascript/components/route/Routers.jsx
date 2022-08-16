@@ -15,7 +15,7 @@ export const Routers = () => {
   const checkLoginStatus = async () => {
     setIsLoading(true);
     await axios
-      .get('http://localhost:3000/api/v1/logged_in', { withCredentials: true })
+      .get('http://localhost:3000/api/v1/logged_in')
       .then((response) => {
         if (response.data.logged_in) {
           setIsLogin(true);

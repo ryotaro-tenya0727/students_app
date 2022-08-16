@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import axios from './../axios/axios';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { useSetRecoilState } from 'recoil';
 
