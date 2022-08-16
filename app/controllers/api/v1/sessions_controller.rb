@@ -1,4 +1,5 @@
 class Api::V1::SessionsController < ApplicationController
+  skip_before_action :verify_authenticity_token, only: :show
   def login
     @user = User.find_by(email: session_params[:email])
     if @user && @user.authenticate(session_params[:password])
@@ -22,8 +23,9 @@ class Api::V1::SessionsController < ApplicationController
     end
   end
 
-  def index
-    render json: { status: 200, logged_out: true }
+  def show
+    set_csrf_token
+    head :ok
   end
 
   private
