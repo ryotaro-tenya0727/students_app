@@ -11,9 +11,10 @@ class RegistrationForm
   def save_user!
     user = User.new(email: email, name: name, password: password)
     return false if user.invalid?
+
     user.save
     user.links.create(links)
-    user.update(register_technology_ids: technology_ids) if !technology_ids.empty?
+    user.update(register_technology_ids: technology_ids) unless technology_ids.empty?
     user
   end
 end
