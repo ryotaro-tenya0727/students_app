@@ -22,8 +22,9 @@ class Api::V1::SessionsController < ApplicationController
     end
   end
 
-  def index
-    render json: { status: 200, logged_out: true }
+  def show
+    set_csrf_token
+    head :ok
   end
 
   private
