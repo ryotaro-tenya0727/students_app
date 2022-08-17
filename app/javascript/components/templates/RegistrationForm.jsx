@@ -8,6 +8,8 @@ import { LoadingStatus } from './../store/LoginState';
 import { useLogin } from '../hooks/useLogin';
 
 const RegistrationForm = () => {
+  const clientId = gon.REACT_APP_CLIENT_ID;
+  console.log(clientId);
   const { handleSuccessfulAuthentication } = useLogin();
   const setIsLoading = useSetRecoilState(LoadingStatus);
   const { control, register, handleSubmit } = useForm({
@@ -51,6 +53,11 @@ const RegistrationForm = () => {
   return (
     <div>
       <p>新規登録</p>
+      <a
+        href={`https://github.com/login/oauth/authorize?scope=read:user&client_id=${clientId}`}
+      >
+        Githubの内容を取得
+      </a>
       <form onSubmit={handleSubmit(onSubmit)}>
         <label>メール</label>
         <input {...register('user.email')} />

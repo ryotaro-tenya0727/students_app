@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root to: 'home#index'
   namespace :api, format: 'json'  do
     namespace :v1 do
-      post 'callbacks', to: 'github_oauth#callback'
+      get 'callback', to: 'github_oauth#callback'
       get '/logged_in', to: 'sessions#logged_in?'
       get '/show', to: 'sessions#show'
       post '/signup', to: 'registrations#signup'
