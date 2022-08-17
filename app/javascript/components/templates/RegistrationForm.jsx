@@ -9,7 +9,6 @@ import { useLogin } from '../hooks/useLogin';
 
 const RegistrationForm = () => {
   const clientId = gon.REACT_APP_CLIENT_ID;
-  console.log(clientId);
   const { handleSuccessfulAuthentication } = useLogin();
   const setIsLoading = useSetRecoilState(LoadingStatus);
   const { control, register, handleSubmit } = useForm({
