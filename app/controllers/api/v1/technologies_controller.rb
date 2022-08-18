@@ -1,7 +1,7 @@
 class Api::V1::TechnologiesController < ApplicationController
   def index
     technologies = Technology.all
-    render_json = TechnologySerializer.new(technologies)
-    render json: json_string
+    render_json = TechnologySerializer.new(technologies).serializable_hash.to_json
+    render json: render_json, status: :ok
   end
 end

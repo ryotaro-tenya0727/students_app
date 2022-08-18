@@ -32,7 +32,6 @@ const RegistrationForm = () => {
   };
 
   const onSubmit = async (data) => {
-    console.log(data);
     setIsLoading(true);
     await axios
       .post(`${window.location.origin}/api/v1/signup`, data)
