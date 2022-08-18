@@ -9,13 +9,11 @@ import { useLogin } from '../hooks/useLogin';
 
 const RegistrationForm = () => {
   const clientId = gon.REACT_APP_CLIENT_ID;
-  const imageUrl = gon.image_url;
-  console.log(imageUrl);
   const { handleSuccessfulAuthentication } = useLogin();
   const setIsLoading = useSetRecoilState(LoadingStatus);
   const { control, register, handleSubmit } = useForm({
     defaultValues: {
-      user: { technology_ids: [], links: [{ url: '' }] },
+      user: { technology_ids: [], links: [{ url: '', link_type: 'sns' }] },
     },
   });
   const { fields, append, prepend, remove, swap, move, insert } = useFieldArray(
@@ -34,6 +32,7 @@ const RegistrationForm = () => {
   };
 
   const onSubmit = async (data) => {
+    console.log(data);
     setIsLoading(true);
     await axios
       .post('http://localhost:3000/api/v1/signup', data)
@@ -90,6 +89,11 @@ const RegistrationForm = () => {
               key={field.id}
               {...register(`user.links[${index}].url`)}
             />
+            <select {...register(`user.links[${index}].link_type`)}>
+              <option value='sns'>SNS</option>
+              <option value='web_site'>WEBサイト</option>
+              <option value='blog'>ブログ</option>
+            </select>
             <button type='button' onClick={() => handleRemove(index)}>
               削除
             </button>

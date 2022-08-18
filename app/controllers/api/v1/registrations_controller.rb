@@ -12,6 +12,6 @@ class Api::V1::RegistrationsController < ApplicationController
   private
 
   def registrations_params
-    params.require(:user).permit(:email, :name, :password, links: [:url], technology_ids: [])
+    params.require(:user).permit(:email, :name, :password, links: [:url, :link_type], technology_ids: [])
   end
 end

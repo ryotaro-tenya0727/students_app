@@ -3,7 +3,7 @@
 # Table name: links
 #
 #  id         :integer          not null, primary key
-#  type       :integer          not null
+#  link_type  :integer          not null
 #  url        :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
@@ -20,4 +20,6 @@
 class Link < ApplicationRecord
   belongs_to :user
   validates :url, presence: true
+
+  enum link_type: { sns: 0, web_site: 1, blog: 2 }
 end
