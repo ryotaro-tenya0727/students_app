@@ -10,6 +10,6 @@
 #  index_genres_on_name  (name) UNIQUE
 #
 class Genre < ApplicationRecord
-  has_many :technology_genres
+  has_many :technology_genres, dependent: :destroy
   has_many :technologies, through: :technology_genres, source: :technology
 end

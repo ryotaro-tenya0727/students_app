@@ -35,7 +35,7 @@ const RegistrationForm = () => {
     console.log(data);
     setIsLoading(true);
     await axios
-      .post('http://localhost:3000/api/v1/signup', data)
+      .post(`${window.location.origin}/api/v1/signup`, data)
       .then((response) => {
         if (response.data.status === 'created') {
           handleSuccessfulAuthentication(response.data);
