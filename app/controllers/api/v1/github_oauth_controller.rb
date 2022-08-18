@@ -5,9 +5,17 @@ class Api::V1::GithubOauthController < ApplicationController
     conn = Faraday.new do |builder|
       builder.request :json
     end
-
     response = conn.post(ENV['GITHUB_FETCH_TOKEN_URL'],{client_id: ENV['REACT_APP_CLIENT_ID'], client_secret: ENV['CLIENT_SECRET'], code: params[:code] })
-    # byebug
+    access_token = Rack::Utils.parse_nested_query(response.body)["access_token"]
+
+    req = Faraday.new(
+      url: "#{ENV['GITHUB_API_URL']}/user",
+      headers: {"Authorization": "token #{access_token}"}
+    )
+    user_response = req.get
+    user_info = JSON.parse(user_response.body)
+
+    byebug
     # redirect_to '/registration'
   end
 end
