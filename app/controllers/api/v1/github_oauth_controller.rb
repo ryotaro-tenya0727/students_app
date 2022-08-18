@@ -15,6 +15,6 @@ class Api::V1::GithubOauthController < ApplicationController
     user_response = req.get
     user_info = JSON.parse(user_response.body)
     image_url = user_info["avatar_url"]
-    redirect_to "http://localhost:3000/registration?image_url=#{image_url}"
+    redirect_to "#{Settings.host}/registration?image_url=#{image_url}"
   end
 end

@@ -18,6 +18,7 @@ gem 'activerecord-import', '~> 1.4'
 # 環境変数
 gem 'dotenv-rails'
 gem 'gon'
+gem 'config'
 
 # HTTPリクエスト
 gem 'faraday'
