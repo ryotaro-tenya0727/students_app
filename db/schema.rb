@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 2022_08_18_110414) do
 
   create_table "technologies", force: :cascade do |t|
     t.string "name", null: false
-    t.string "genre", null: false
+    t.string "kind", null: false
     t.index ["name"], name: "index_technologies_on_name", unique: true
   end
 

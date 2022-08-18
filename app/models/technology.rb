@@ -2,9 +2,9 @@
 #
 # Table name: technologies
 #
-#  id    :integer          not null, primary key
-#  genre :string           not null
-#  name  :string           not null
+#  id   :integer          not null, primary key
+#  kind :string           not null
+#  name :string           not null
 #
 # Indexes
 #
@@ -17,5 +17,5 @@ class Technology < ApplicationRecord
   has_many :interesting_technologies, dependent: :destroy
   has_many :users, through: :interesting_technologies, source: :user
   validates :name, presence: true
-  validates :genre, presence: true
+  validates :kind, presence: true
 end
