@@ -9,6 +9,8 @@ import { useLogin } from '../hooks/useLogin';
 
 const RegistrationForm = () => {
   const clientId = gon.REACT_APP_CLIENT_ID;
+  const imageUrl = gon.image_url;
+  console.log(imageUrl);
   const { handleSuccessfulAuthentication } = useLogin();
   const setIsLoading = useSetRecoilState(LoadingStatus);
   const { control, register, handleSubmit } = useForm({
