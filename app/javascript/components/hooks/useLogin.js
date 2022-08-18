@@ -14,7 +14,7 @@ export const useLogin = () => {
 
   const handleSuccessfulAuthentication = (data) => {
     handleLogin(data);
-    navigate('/dashboard');
+    navigate('/technologies');
   };
   return { setIsLogin, setUserInfo, handleSuccessfulAuthentication };
 };
