@@ -15,6 +15,9 @@ gem 'webpacker', '~> 5.0'
 gem 'bcrypt'
 gem 'activerecord-import', '~> 1.4'
 
+# シリアライザー
+gem 'jsonapi-serializer'
+
 # 環境変数
 gem 'dotenv-rails'
 gem 'gon'
