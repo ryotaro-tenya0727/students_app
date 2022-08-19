@@ -5,7 +5,13 @@ import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 
 import { LoginStatus, UserStatus, LoadingStatus } from './../store/LoginState';
-import { Home, Technologies, Login, Registration } from './../pages/Pages';
+import {
+  Home,
+  Technologies,
+  Login,
+  Registration,
+  TechnologyBoard,
+} from './../pages/Pages';
 
 export const Routers = () => {
   const setIsLoading = useSetRecoilState(LoadingStatus);
@@ -40,6 +46,10 @@ export const Routers = () => {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/technologies' element={<Technologies />} />
+        <Route
+          path='/technologies/:technology_id/board'
+          element={<TechnologyBoard />}
+        />
         <Route path='/login' element={<Login />} />
         <Route path='/registration' element={<Registration />} />
       </Routes>

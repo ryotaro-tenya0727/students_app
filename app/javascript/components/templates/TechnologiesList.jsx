@@ -29,6 +29,7 @@ const TechnologiesList = () => {
       {technologies.data.data.map((technology, index) => (
         <TechnologyCard
           key={index}
+          id={technology.attributes.id}
           name={technology.attributes.name}
           kind={technology.attributes.kind}
           genre={technology.attributes.genre}
