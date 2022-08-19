@@ -16,6 +16,9 @@ class Technology < ApplicationRecord
 
   has_many :interesting_technologies, dependent: :destroy
   has_many :users, through: :interesting_technologies, source: :user
+  has_many :comments
+  has_many :comment_users, through: :comments, source: :user
+
   validates :name, presence: true
   validates :kind, presence: true
 end

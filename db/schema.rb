@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_18_110414) do
+ActiveRecord::Schema.define(version: 2022_08_19_103321) do
+
+  create_table "comments", force: :cascade do |t|
+    t.string "body", null: false
+    t.integer "user_id", null: false
+    t.integer "technology_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["technology_id"], name: "index_comments_on_technology_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
 
   create_table "genres", force: :cascade do |t|
     t.string "name", null: false
@@ -58,6 +68,8 @@ ActiveRecord::Schema.define(version: 2022_08_18_110414) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "comments", "technologies"
+  add_foreign_key "comments", "users"
   add_foreign_key "interesting_technologies", "technologies"
   add_foreign_key "interesting_technologies", "users"
   add_foreign_key "links", "users"
