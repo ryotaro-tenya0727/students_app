@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   namespace :api, format: 'json'  do
     namespace :v1 do
       resources :technologies
+      resources :comments
       get 'callback', to: 'github_oauth#callback'
       get '/logged_in', to: 'sessions#logged_in?'
       get '/show', to: 'sessions#show'
