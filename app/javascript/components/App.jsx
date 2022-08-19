@@ -16,18 +16,18 @@ const App = () => {
   useEffect(() => {
     getCsrfToken();
   }, []);
+  if (isCsrfLoading)
+    return (
+      <h1>
+        セッション取得中あああああああああああああああああああああああああああああああああああああああああああああああああ
+      </h1>
+    );
 
   return (
     <>
-      {isCsrfLoading ? (
-        <h1>
-          セッション取得中あああああああああああああああああああああああああああああああああああああああああああああああああ
-        </h1>
-      ) : (
-        <DefaultLayout>
-          <Routers />
-        </DefaultLayout>
-      )}
+      <DefaultLayout>
+        <Routers />
+      </DefaultLayout>
     </>
   );
 };

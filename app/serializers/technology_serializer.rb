@@ -3,6 +3,6 @@ class TechnologySerializer
   attributes :id, :name, :kind
 
   attribute :genre do |object|
-    "#{object.genre}"
+    "#{object.genre.name}"
   end
 end
