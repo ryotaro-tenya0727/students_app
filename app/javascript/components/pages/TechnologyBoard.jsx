@@ -2,39 +2,70 @@ import axios from './../axios/axios';
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { useRecoilValue } from 'recoil';
+
+import { UserStatus } from './../store/LoginState';
 
 const TechnologyBoard = () => {
   let { technology_id: technologyId } = useParams();
   const [isLoading, setIsLoading] = useState(true);
-
+  const [comments, setComments] = useState({ data: [] });
+  const [title, setTitle] = useState();
   const { register, handleSubmit } = useForm({});
-
+  const userInfo = useRecoilValue(UserStatus);
   const onSubmit = (data) => {
-    console.log(data);
-  };
-  const fetchComments = () =>
+    setComments({
+      data: [
+        ...comments.data,
+        {
+          attributes: { body: data.comments.body, comment_user: userInfo.name },
+        },
+      ],
+    });
     axios
+      .post(
+        `${window.location.origin}/api/v1/technologies/${technologyId}/comments`,
+        data
+      )
+      .then((response) => {
+        console.log('成功');
+      })
+      .catch((error) => {
+        console.log('loading error');
+      });
+  };
+  const fetchComments = async () =>
+    await axios
       .get(
         `${window.location.origin}/api/v1/technologies/${technologyId}/comments`
       )
       .then((response) => {
-        console.log(response.data);
+        setComments(response.data.comments);
+        setTitle(response.data.technology_name);
       })
       .catch((error) => {
         console.log('loading error');
       });
   useEffect(() => {
-    setIsLoading(true);
     fetchComments();
     setIsLoading(false);
   }, []);
 
   if (isLoading) return <>ローディング</>;
+  console.log(comments);
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <input {...register('comments.body')} />
-      <input type='submit' value='送信' />
-    </form>
+    <>
+      <h1>{title}</h1>
+      {comments.data.map((comment, index) => (
+        <li key={index}>
+          {comment.attributes.body} {comment.attributes.comment_user}
+        </li>
+      ))}
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <input {...register('comments.body')} />
+        <input type='submit' value='送信' />
+      </form>
+    </>
   );
 };
 

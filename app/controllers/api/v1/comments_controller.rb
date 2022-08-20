@@ -2,13 +2,13 @@ class Api::V1::CommentsController < ApplicationController
   before_action :set_technology
 
   def index
-    comments = @technology.comments.all.preload(:user)
+    comments = CommentsSerializer.new(@technology.comments.all.preload(:user))
     render json: {comments: comments, technology_name: @technology.name}
   end
 
   def create
     ActiveRecord::Base.transaction do
-      comment = current_user.comments.build(comments_params).merge(technology: @technology)
+      comment = current_user.comments.build(comments_params)
       comment.save!
     end
   end
@@ -20,6 +20,6 @@ class Api::V1::CommentsController < ApplicationController
   end
 
   def comments_params
-    params.require(:comments).permit(:body)
+    params.require(:comments).permit(:body).merge(technology: @technology)
   end
 end
