@@ -1,10 +1,10 @@
 import axios from './axios/axios';
-import React from 'react';
+import React, { memo } from 'react';
 import { useSetRecoilState, useRecoilState } from 'recoil';
 
 import { LoadingStatus, LoginStatus, UserStatus } from './store/LoginState';
 
-export const DefaultLayout = ({ children }) => {
+export const DefaultLayout = memo(({ children }) => {
   const [isLoading, setIsLoading] = useRecoilState(LoadingStatus);
   const [isLogin, setIsLogin] = useRecoilState(LoginStatus);
   const setUserInfo = useSetRecoilState(UserStatus);
@@ -41,4 +41,4 @@ export const DefaultLayout = ({ children }) => {
       {children}
     </>
   );
-};
+});

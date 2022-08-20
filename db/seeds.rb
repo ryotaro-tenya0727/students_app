@@ -5,3 +5,8 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+10.times{|i|
+  user = User.create(email: "test#{i}@aa.com", name: "rest#{i}", password: "password")
+  user.links.create([{link_type: [0,1,2].sample, url: "test-#{i}-url", user: user}])
+  user.update(register_technology_ids: Technology.all.pluck(:id).sample(3))
+}

@@ -24,7 +24,7 @@ const TechnologyBoard = () => {
         setTitle(response.data.technology_name);
       })
       .catch((error) => {
-        console.log('loading error');
+        console.log('comment error');
       });
   };
   const fetchComments = async () =>

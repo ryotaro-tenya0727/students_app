@@ -1,5 +1,6 @@
 import axios from 'axios';
-import React from 'react';
+import React, { memo } from 'react';
+
 import { useEffect } from 'react';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
@@ -13,7 +14,7 @@ import {
   TechnologyBoard,
 } from './../pages/Pages';
 
-export const Routers = () => {
+export const Routers = memo(() => {
   const setIsLoading = useSetRecoilState(LoadingStatus);
   const setIsLogin = useSetRecoilState(LoginStatus);
   const setUserInfo = useSetRecoilState(UserStatus);
@@ -55,4 +56,4 @@ export const Routers = () => {
       </Routes>
     </BrowserRouter>
   );
-};
+});
