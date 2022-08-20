@@ -1,13 +1,7 @@
 class Api::V1::CommentsController < ApplicationController
+  def index; end
 
-  def index
-
-  end
-
-  def create
-
-  end
-
+  def create; end
 
   privete
 
