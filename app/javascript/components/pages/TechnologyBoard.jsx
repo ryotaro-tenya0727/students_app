@@ -14,21 +14,14 @@ const TechnologyBoard = () => {
   const { register, handleSubmit } = useForm({});
   const userInfo = useRecoilValue(UserStatus);
   const onSubmit = (data) => {
-    setComments({
-      data: [
-        ...comments.data,
-        {
-          attributes: { body: data.comments.body, comment_user: userInfo.name },
-        },
-      ],
-    });
     axios
       .post(
         `${window.location.origin}/api/v1/technologies/${technologyId}/comments`,
         data
       )
       .then((response) => {
-        console.log('成功');
+        setComments(response.data.comments);
+        setTitle(response.data.technology_name);
       })
       .catch((error) => {
         console.log('loading error');

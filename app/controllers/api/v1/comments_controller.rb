@@ -11,6 +11,8 @@ class Api::V1::CommentsController < ApplicationController
       comment = current_user.comments.build(comments_params)
       comment.save!
     end
+    comments = CommentsSerializer.new(@technology.comments.all.preload(:user))
+    render json: {comments: comments, technology_name: @technology.name}
   end
 
   private
