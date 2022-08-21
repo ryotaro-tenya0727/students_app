@@ -11,8 +11,9 @@
 #
 # Indexes
 #
-#  index_comments_on_technology_id  (technology_id)
-#  index_comments_on_user_id        (user_id)
+#  index_comments_on_technology_id           (technology_id)
+#  index_comments_on_user_id                 (user_id)
+#  index_comments_on_user_id_and_created_at  (user_id,created_at)
 #
 # Foreign Keys
 #

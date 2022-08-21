@@ -16,14 +16,35 @@
 class User < ApplicationRecord
   has_secure_password
 
+  has_many :links, dependent: :destroy
   has_many :interesting_technologies, dependent: :destroy
   has_many :register_technologies, through: :interesting_technologies, source: :technology
-  has_many :links, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :comment_technologies, through: :comments, source: :technology
+  # 自分がフォロワーのレコード
+  has_many :active_relationships, class_name:  "UserRelationship",
+                                  foreign_key: "follower_id",
+                                  dependent:   :destroy
+  has_many :following, through: :active_relationships, source: :follow
+  has_many :passive_relationships, class_name:  "UserRelationship",
+                                   foreign_key: "follow_id",
+                                   dependent:   :destroy
+  has_many :followers, through: :passive_relationships, source: :follower
 
   validates :email, presence: true
   validates :email, uniqueness: true
   validates :name, presence: true
   validates :password, presence: true
+
+  def follow(other_user)
+    following << other_user
+  end
+
+  def unfollow(other_user)
+    active_relationships.find_by(follow_id: other_user.id).destroy
+  end
+
+  def following?(other_user)
+    following.include?(other_user)
+  end
 end

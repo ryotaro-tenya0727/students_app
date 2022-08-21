@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_19_103321) do
+ActiveRecord::Schema.define(version: 2022_08_20_192509) do
 
   create_table "comments", force: :cascade do |t|
     t.string "body", null: false
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 2022_08_19_103321) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["technology_id"], name: "index_comments_on_technology_id"
+    t.index ["user_id", "created_at"], name: "index_comments_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
@@ -59,6 +60,15 @@ ActiveRecord::Schema.define(version: 2022_08_19_103321) do
     t.index ["technology_id"], name: "index_technology_genres_on_technology_id"
   end
 
+  create_table "user_relationships", force: :cascade do |t|
+    t.integer "follow_id"
+    t.integer "follower_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["follow_id"], name: "index_user_relationships_on_follow_id"
+    t.index ["follower_id"], name: "index_user_relationships_on_follower_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", null: false
     t.string "name", null: false
@@ -75,4 +85,6 @@ ActiveRecord::Schema.define(version: 2022_08_19_103321) do
   add_foreign_key "links", "users"
   add_foreign_key "technology_genres", "genres"
   add_foreign_key "technology_genres", "technologies"
+  add_foreign_key "user_relationships", "users", column: "follow_id"
+  add_foreign_key "user_relationships", "users", column: "follower_id"
 end
