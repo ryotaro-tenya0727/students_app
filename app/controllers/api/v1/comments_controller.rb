@@ -3,7 +3,7 @@ class Api::V1::CommentsController < ApplicationController
 
   def index
     comments = CommentsSerializer.new(@technology.comments.all.preload(:user))
-    render json: {comments: comments, technology_name: @technology.name}
+    render json: { comments: comments, technology_name: @technology.name }
   end
 
   def create
@@ -12,7 +12,7 @@ class Api::V1::CommentsController < ApplicationController
       comment.save!
     end
     comments = CommentsSerializer.new(@technology.comments.all.preload(:user))
-    render json: {comments: comments, technology_name: @technology.name}
+    render json: { comments: comments, technology_name: @technology.name }
   end
 
   private

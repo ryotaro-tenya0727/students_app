@@ -22,13 +22,13 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :comment_technologies, through: :comments, source: :technology
   # 自分がフォロワーのレコード
-  has_many :active_relationships, class_name:  "UserRelationship",
-                                  foreign_key: "follower_id",
-                                  dependent:   :destroy
+  has_many :active_relationships, class_name: 'UserRelationship',
+                                  foreign_key: 'follower_id',
+                                  dependent: :destroy
   has_many :following, through: :active_relationships, source: :follow
-  has_many :passive_relationships, class_name:  "UserRelationship",
-                                   foreign_key: "follow_id",
-                                   dependent:   :destroy
+  has_many :passive_relationships, class_name: 'UserRelationship',
+                                   foreign_key: 'follow_id',
+                                   dependent: :destroy
   has_many :followers, through: :passive_relationships, source: :follower
 
   validates :email, presence: true
