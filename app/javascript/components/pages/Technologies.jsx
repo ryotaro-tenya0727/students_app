@@ -1,10 +1,11 @@
 import React from 'react';
-import { TechnologiesList } from './../templates/Templates';
+import { TechnologiesList, UsersList } from './../templates/Templates';
 
 const Technologies = () => {
   return (
     <div>
       <TechnologiesList />
+      <UsersList />
     </div>
   );
 };

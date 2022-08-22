@@ -6,7 +6,7 @@ import { TechnologyCard } from './../organisms/Organisms';
 
 const TechnologiesList = () => {
   const {
-    isLoading,
+    isLoading: isTechnologyLoading,
     error,
     data: technologies,
     isSuccess,
@@ -23,7 +23,7 @@ const TechnologiesList = () => {
       staleTime: Infinity,
     }
   );
-  if (isLoading) return 'Loading...';
+  if (isTechnologyLoading) return 'Loading...';
   return (
     <>
       {technologies.data.data.map((technology, index) => (
