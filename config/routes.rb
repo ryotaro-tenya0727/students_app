@@ -7,6 +7,7 @@ Rails.application.routes.draw do
         resources :comments
       end
       resources :users
+      resources :user_relationships
       get 'callback', to: 'github_oauth#callback'
       get '/logged_in', to: 'sessions#logged_in?'
       get '/show', to: 'sessions#show'
