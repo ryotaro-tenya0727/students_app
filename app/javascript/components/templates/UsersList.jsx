@@ -22,6 +22,7 @@ const UsersList = () => {
     }
   );
   if (isUsersLoading) return 'Loading...Loading...Loading...Loading...';
+  console.log(users);
   return (
     <>
       <h2>Users</h2>
@@ -30,6 +31,7 @@ const UsersList = () => {
           key={index}
           id={user.attributes.id}
           name={user.attributes.name}
+          following={user.attributes.following}
         />
       ))}
     </>

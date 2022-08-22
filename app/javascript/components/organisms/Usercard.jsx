@@ -4,11 +4,19 @@ import { useRecoilValue } from 'recoil';
 import { FollowButton } from './../atoms/Atoms';
 import { UserStatus } from './../store/LoginState';
 
-const Usercard = memo(({ id, name }) => {
+const Usercard = memo(({ id, name, following }) => {
   const userInfo = useRecoilValue(UserStatus);
   return (
     <div>
-      {userInfo.id != id ? <FollowButton id={id} /> : <></>}
+      {userInfo.id != id && userInfo.id != undefined ? (
+        following ? (
+          <>アンフォロー</>
+        ) : (
+          <FollowButton id={id} />
+        )
+      ) : (
+        <></>
+      )}
       {name}
     </div>
   );
