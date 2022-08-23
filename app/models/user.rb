@@ -45,6 +45,6 @@ class User < ApplicationRecord
   end
 
   def following?(other_user)
-    following.include?(other_user)
+    other_user.passive_relationships.pluck(:follower_id).include?(id)
   end
 end
