@@ -18,7 +18,7 @@ class Technology < ApplicationRecord
   has_many :users, through: :interesting_technologies, source: :user
   has_many :comments
   has_many :comment_users, through: :comments, source: :user
-
+  #  Technology.all.preload(:comment_users).sort{|a,b| b.comment_users.size <=> a.comment_users.size}
   validates :name, presence: true
   validates :kind, presence: true
 end
