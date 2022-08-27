@@ -62,4 +62,9 @@ class User < ApplicationRecord
       notification.save if notification.valid?
     end
   end
+
+  def new_notifications_count
+    notifications = Notification.where("notified_id = (:notified_id)", notified_id: id).pluck(:checked).tally[false]
+    return notifications != nil ? notifications : 0
+  end
 end

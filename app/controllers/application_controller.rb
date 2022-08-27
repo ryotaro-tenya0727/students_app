@@ -2,8 +2,6 @@ class ApplicationController < ActionController::Base
   # csrfトークンの確認をスキップ
   # skip_before_action :verify_authenticity_token
 
-  helper_method :login!, :current_user
-
   def login!
     session[:user_id] = @user.id
   end

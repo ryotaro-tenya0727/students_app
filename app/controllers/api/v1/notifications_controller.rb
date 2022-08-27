@@ -8,7 +8,9 @@ class Api::V1::NotificationsController < ApplicationController
       @notifications.where(checked: false).each do |notification|
           notification.update(checked: true)
       end
-      render json: @notifications
+
+      notificaitons = NotificationSerializer.new(@notifications)
+      render json: notificaitons
     end
   end
 end

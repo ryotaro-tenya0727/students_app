@@ -8,32 +8,32 @@ import { LoadingStatus, LoginStatus, UserStatus } from './store/LoginState';
 export const DefaultLayout = memo(({ children }) => {
   const [isLoading, setIsLoading] = useRecoilState(LoadingStatus);
   const [isLogin, setIsLogin] = useRecoilState(LoginStatus);
-  const setUserInfo = useSetRecoilState(UserStatus);
+  const [userInfo, setUserInfo] = useRecoilState(UserStatus);
   const handleLogout = () => {
     setIsLogin(false);
     setUserInfo({});
   };
 
-  const {
-    isLoading: isNotificationLoading,
-    error,
-    data: notifications,
-    isSuccess,
-  } = useQuery(
-    ['notifications'],
-    () =>
-      axios
-        .get(`${window.location.origin}/api/v1/notifications`)
-        .catch((error) => {
-          console.error(error.response.data);
-        }),
-    {
-      cacheTime: Infinity,
-      staleTime: Infinity,
-    }
-  );
+  // const {
+  //   isLoading: isNotificationLoading,
+  //   error,
+  //   data: notifications,
+  //   isSuccess,
+  // } = useQuery(
+  //   ['notifications'],
+  //   () =>
+  //     axios
+  //       .get(`${window.location.origin}/api/v1/notifications`)
+  //       .catch((error) => {
+  //         console.error(error.response.data);
+  //       }),
+  //   {
+  //     cacheTime: Infinity,
+  //     staleTime: Infinity,
+  //   }
+  // );
 
-  console.log(notifications);
+  console.log(userInfo);
 
   const handleLogoutClick = async () => {
     setIsLoading(true);
@@ -55,10 +55,10 @@ export const DefaultLayout = memo(({ children }) => {
         ) : isLogin ? (
           <>
             <button onClick={handleLogoutClick}>ログアウト</button>
-            {isNotificationLoading ? (
-              <>読み込み</>
+            {userInfo.new_notifications_count === 0 ? (
+              <>通知なし</>
             ) : (
-              <>通知の数({notifications.data.length})</>
+              <>通知あり{userInfo.new_notifications_count}</>
             )}
           </>
         ) : (

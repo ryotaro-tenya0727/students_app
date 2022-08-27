@@ -16,7 +16,7 @@ class Api::V1::SessionsController < ApplicationController
 
   def logged_in?
     if current_user
-      render json: { logged_in: true, user: @current_user }
+      render json: { logged_in: true, user: current_user, new_notifications_count: current_user.new_notifications_count }
     else
       render json: { logged_in: false, message: 'ユーザーが存在しません' }
     end

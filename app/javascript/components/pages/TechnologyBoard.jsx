@@ -45,7 +45,6 @@ const TechnologyBoard = () => {
   }, []);
 
   if (isLoading) return <>ローディング</>;
-  console.log(comments);
   return (
     <>
       <h1>{title}</h1>

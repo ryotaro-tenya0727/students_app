@@ -26,7 +26,7 @@ export const Routers = memo(() => {
       .then((response) => {
         if (response.data.logged_in) {
           setIsLogin(true);
-          setUserInfo(response.data.user);
+          setUserInfo(response.data);
         } else if (!response.data.logged_in) {
           setIsLogin(false);
           setUserInfo({});
