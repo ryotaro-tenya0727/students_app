@@ -33,6 +33,7 @@ export const DefaultLayout = memo(({ children }) => {
         ) : isLogin ? (
           <>
             <button onClick={handleLogoutClick}>ログアウト</button>
+            通知の数()
           </>
         ) : (
           '未ログイン'

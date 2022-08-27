@@ -52,11 +52,11 @@ class User < ApplicationRecord
     other_user.followers.include?(self)
   end
 
-  def create_notification_follow!(notified_user)
+  def create_notification_follow(notified_user)
     temp = Notification.where(["notifier_id = ? and notified_id = ? and action = ? ", id, notified_user.id, 'follow'])
     if temp.blank?
-      notification = current_user.active_notifications.new(
-        visited_id: id,
+      notification = active_notifications.new(
+        notified_id: notified_user.id,
         action: 'follow'
       )
       notification.save if notification.valid?

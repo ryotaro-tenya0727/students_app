@@ -1,8 +1,10 @@
 class Api::V1::UserRelationshipsController < ApplicationController
   def create
-    other_user = User.find_by(id: params[:id])
-    current_user.follow(other_user)
-    current_user.create_notification_follow(other_user)
+    ActiveRecord::Base.transaction do
+      other_user = User.find_by(id: params[:id])
+      current_user.follow(other_user)
+      current_user.create_notification_follow(other_user)
+    end
     head :ok
   end
 
