@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       resources :technologies do
         resources :comments
       end
+      resources :notifications, only: :index
       resources :users
       resources :user_relationships
       get 'callback', to: 'github_oauth#callback'
