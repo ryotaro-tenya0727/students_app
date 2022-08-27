@@ -21,7 +21,7 @@ class User < ApplicationRecord
   has_many :register_technologies, through: :interesting_technologies, source: :technology
   has_many :comments, dependent: :destroy
   has_many :comment_technologies, through: :comments, source: :technology
-  # 自分がフォロワーのレコード
+  # フォロー機能
   has_many :active_relationships, class_name: 'UserRelationship',
                                   foreign_key: 'follower_id',
                                   dependent: :destroy
@@ -30,6 +30,10 @@ class User < ApplicationRecord
                                    foreign_key: 'follow_id',
                                    dependent: :destroy
   has_many :followers, through: :passive_relationships, source: :follower
+
+  # 通知機能
+  has_many :active_notifications, class_name: "Notification", foreign_key: "notifier_id", dependent: :destroy
+  has_many :passive_notifications, class_name: "Notification", foreign_key: "notified_id", dependent: :destroy
 
   validates :email, presence: true
   validates :email, uniqueness: true

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_21_072429) do
+ActiveRecord::Schema.define(version: 2022_08_27_185013) do
 
   create_table "comments", force: :cascade do |t|
     t.string "body", null: false
@@ -45,6 +45,17 @@ ActiveRecord::Schema.define(version: 2022_08_21_072429) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "link_type", null: false
     t.index ["user_id"], name: "index_links_on_user_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer "notifier_id", null: false
+    t.integer "notified_id", null: false
+    t.string "action", default: "", null: false
+    t.boolean "checked", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["notified_id"], name: "index_notifications_on_notified_id"
+    t.index ["notifier_id"], name: "index_notifications_on_notifier_id"
   end
 
   create_table "technologies", force: :cascade do |t|
@@ -84,6 +95,8 @@ ActiveRecord::Schema.define(version: 2022_08_21_072429) do
   add_foreign_key "interesting_technologies", "technologies"
   add_foreign_key "interesting_technologies", "users"
   add_foreign_key "links", "users"
+  add_foreign_key "notifications", "users", column: "notified_id"
+  add_foreign_key "notifications", "users", column: "notifier_id"
   add_foreign_key "technology_genres", "genres"
   add_foreign_key "technology_genres", "technologies"
   add_foreign_key "user_relationships", "users", column: "follow_id"
