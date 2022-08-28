@@ -32,8 +32,8 @@ class User < ApplicationRecord
   has_many :followers, through: :passive_relationships, source: :follower
 
   # 通知機能
-  has_many :active_notifications, class_name: "Notification", foreign_key: "notifier_id", dependent: :destroy
-  has_many :passive_notifications, class_name: "Notification", foreign_key: "notified_id", dependent: :destroy
+  has_many :active_notifications, class_name: 'Notification', foreign_key: 'notifier_id', dependent: :destroy
+  has_many :passive_notifications, class_name: 'Notification', foreign_key: 'notified_id', dependent: :destroy
 
   validates :email, presence: true
   validates :email, uniqueness: true
@@ -53,7 +53,7 @@ class User < ApplicationRecord
   end
 
   def create_notification_follow(notified_user)
-    temp = Notification.where(["notifier_id = ? and notified_id = ? and action = ? ", id, notified_user.id, 'follow'])
+    temp = Notification.where(['notifier_id = ? and notified_id = ? and action = ? ', id, notified_user.id, 'follow'])
     if temp.blank?
       notification = active_notifications.new(
         notified_id: notified_user.id,
@@ -64,7 +64,7 @@ class User < ApplicationRecord
   end
 
   def new_notifications_count
-    notifications = Notification.where("notified_id = (:notified_id)", notified_id: id).pluck(:checked).tally[false]
-    return notifications != nil ? notifications : 0
+    notifications = Notification.where('notified_id = (:notified_id)', notified_id: id).pluck(:checked).tally[false]
+    !notifications.nil? ? notifications : 0
   end
 end

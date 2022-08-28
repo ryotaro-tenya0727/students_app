@@ -7,11 +7,10 @@ class UsersSerializer
     super(resource)
   end
 
-
   attribute :following do |user|
     current_user = @@options[:current_user]
     if current_user.nil?
-      "Not Loggin"
+      'Not Loggin'
     else
       current_user.following?(user)
     end
