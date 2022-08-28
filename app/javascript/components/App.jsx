@@ -25,9 +25,9 @@ const App = () => {
 
   return (
     <>
-      <DefaultLayout>
-        <Routers />
-      </DefaultLayout>
+      {/* <DefaultLayout> */}
+      <Routers />
+      {/* </DefaultLayout> */}
     </>
   );
 };

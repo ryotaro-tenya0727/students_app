@@ -5,6 +5,8 @@ import { useEffect } from 'react';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 
+import { DefaultLayout } from './../layout';
+
 import { LoginStatus, UserStatus, LoadingStatus } from './../store/LoginState';
 import {
   Home,
@@ -12,6 +14,7 @@ import {
   Login,
   Registration,
   TechnologyBoard,
+  Mypage,
 } from './../pages/Pages';
 
 export const Routers = memo(() => {
@@ -20,7 +23,6 @@ export const Routers = memo(() => {
   const setUserInfo = useSetRecoilState(UserStatus);
 
   const checkLoginStatus = async () => {
-    setIsLoading(true);
     await axios
       .get('http://localhost:3000/api/v1/logged_in')
       .then((response) => {
@@ -44,16 +46,19 @@ export const Routers = memo(() => {
 
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/technologies' element={<Technologies />} />
-        <Route
-          path='/technologies/:technology_id/board'
-          element={<TechnologyBoard />}
-        />
-        <Route path='/login' element={<Login />} />
-        <Route path='/registration' element={<Registration />} />
-      </Routes>
+      <DefaultLayout>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/mypage' element={<Mypage />} />
+          <Route path='/technologies' element={<Technologies />} />
+          <Route
+            path='/technologies/:technology_id/board'
+            element={<TechnologyBoard />}
+          />
+          <Route path='/login' element={<Login />} />
+          <Route path='/registration' element={<Registration />} />
+        </Routes>
+      </DefaultLayout>
     </BrowserRouter>
   );
 });

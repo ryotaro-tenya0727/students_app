@@ -11,6 +11,7 @@ class Api::V1::SessionsController < ApplicationController
 
   def logout
     reset_session
+    set_csrf_token
     render json: { status: 200, logged_out: true }
   end
 

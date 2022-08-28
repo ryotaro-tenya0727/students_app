@@ -1,9 +1,12 @@
 import axios from './axios/axios';
 import React, { memo } from 'react';
+import { BrowserRouter, Link } from 'react-router-dom';
 import { useSetRecoilState, useRecoilState } from 'recoil';
 import { useQuery } from '@tanstack/react-query';
 
 import { LoadingStatus, LoginStatus, UserStatus } from './store/LoginState';
+
+import { Mypage } from './pages/Pages';
 
 export const DefaultLayout = memo(({ children }) => {
   const [isLoading, setIsLoading] = useRecoilState(LoadingStatus);
@@ -33,8 +36,6 @@ export const DefaultLayout = memo(({ children }) => {
   //   }
   // );
 
-  console.log(userInfo);
-
   const handleLogoutClick = async () => {
     setIsLoading(true);
     await axios
@@ -58,7 +59,9 @@ export const DefaultLayout = memo(({ children }) => {
             {userInfo.new_notifications_count === 0 ? (
               <>通知なし</>
             ) : (
-              <>通知あり{userInfo.new_notifications_count}</>
+              <Link to='/mypage'>
+                通知あり{userInfo.new_notifications_count}
+              </Link>
             )}
           </>
         ) : (
