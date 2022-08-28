@@ -101,3 +101,7 @@ Style/SafeNavigation:
   Enabled: false
 Rails/SkipsModelValidations:
   Enabled: false
+Style/ClassVars:
+  Enabled: false
+Style/GuardClause:
+  Enabled: false
