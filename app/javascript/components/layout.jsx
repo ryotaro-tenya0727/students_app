@@ -48,16 +48,19 @@ export const DefaultLayout = memo(({ children }) => {
       .catch((error) => console.log('ログアウトエラー', error));
     setIsLoading(false);
   };
+
+  if (isLoading) {
+    return <>ローディング</>;
+  }
+  console.log(userInfo);
   return (
     <>
       <h2>
-        {isLoading ? (
-          <>ローディング</>
-        ) : isLogin ? (
+        {isLogin ? (
           <>
             <button onClick={handleLogoutClick}>ログアウト</button>
             {userInfo.new_notifications_count === 0 ? (
-              <>通知なし</>
+              <Link to='/mypage'>通知なし</Link>
             ) : (
               <Link to='/mypage'>
                 通知あり{userInfo.new_notifications_count}

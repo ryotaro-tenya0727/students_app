@@ -64,7 +64,7 @@ class User < ApplicationRecord
   end
 
   def new_notifications_count
-    notifications = Notification.where('notified_id = (:notified_id)', notified_id: id).pluck(:checked).tally[false]
-    !notifications.nil? ? notifications : 0
+    notifications_count = Notification.where('notified_id = (:notified_id)', notified_id: id).pluck(:checked).tally[false]
+    !notifications_count.nil? ? notifications_count : 0
   end
 end

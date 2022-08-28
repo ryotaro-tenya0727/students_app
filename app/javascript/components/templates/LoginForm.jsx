@@ -25,6 +25,7 @@ const LoginForm = () => {
       .then((response) => {
         if (response.data.logged_in) {
           handleSuccessfulAuthentication(response.data);
+          console.log(response.data);
         }
       })
       .catch((error) => {

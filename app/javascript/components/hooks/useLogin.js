@@ -9,7 +9,7 @@ export const useLogin = () => {
 
   const handleLogin = (data) => {
     setIsLogin(true);
-    setUserInfo(data.user);
+    setUserInfo(data);
   };
 
   const handleSuccessfulAuthentication = (data) => {
